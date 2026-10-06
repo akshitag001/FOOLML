@@ -1,0 +1,670 @@
+{
+  "note": "Attack re-run for illustration with the final configuration; labels are the model's answer for the attack's working image at each step.",
+  "config": {
+    "opts": {
+      "low_freq": null,
+      "texture": 1.0
+    },
+    "multi_start": false,
+    "margin": 0.05
+  },
+  "images": [
+    {
+      "name": "cat_7",
+      "true_label": "cat",
+      "start_source": "noise",
+      "clean": "data/frames/cat_7/clean.png",
+      "clean_32": "data/frames/cat_7/clean_32.png",
+      "frames": [
+        {
+          "stage": "start",
+          "file": "data/frames/cat_7/000.png",
+          "file_32": "data/frames/cat_7/000_32.png",
+          "noise": "data/frames/cat_7/000_noise.png",
+          "noise_32": "data/frames/cat_7/000_noise_32.png",
+          "l2": 21.37468910217285,
+          "label": "bird",
+          "queries": 1
+        },
+        {
+          "stage": "binary search",
+          "file": "data/frames/cat_7/001.png",
+          "file_32": "data/frames/cat_7/001_32.png",
+          "noise": "data/frames/cat_7/001_noise.png",
+          "noise_32": "data/frames/cat_7/001_noise_32.png",
+          "l2": 4.2862229347229,
+          "label": "frog",
+          "queries": 13
+        },
+        {
+          "stage": "binary search",
+          "file": "data/frames/cat_7/002.png",
+          "file_32": "data/frames/cat_7/002_32.png",
+          "noise": "data/frames/cat_7/002_noise.png",
+          "noise_32": "data/frames/cat_7/002_noise_32.png",
+          "l2": 4.260666847229004,
+          "label": "frog",
+          "queries": 31
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/cat_7/003.png",
+          "file_32": "data/frames/cat_7/003_32.png",
+          "noise": "data/frames/cat_7/003_noise.png",
+          "noise_32": "data/frames/cat_7/003_noise_32.png",
+          "l2": 1.7601033449172974,
+          "label": "frog",
+          "queries": 150
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/cat_7/004.png",
+          "file_32": "data/frames/cat_7/004_32.png",
+          "noise": "data/frames/cat_7/004_noise.png",
+          "noise_32": "data/frames/cat_7/004_noise_32.png",
+          "l2": 1.055044412612915,
+          "label": "frog",
+          "queries": 310
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/cat_7/005.png",
+          "file_32": "data/frames/cat_7/005_32.png",
+          "noise": "data/frames/cat_7/005_noise.png",
+          "noise_32": "data/frames/cat_7/005_noise_32.png",
+          "l2": 0.7168174386024475,
+          "label": "frog",
+          "queries": 502
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/cat_7/006.png",
+          "file_32": "data/frames/cat_7/006_32.png",
+          "noise": "data/frames/cat_7/006_noise.png",
+          "noise_32": "data/frames/cat_7/006_noise_32.png",
+          "l2": 0.5461715459823608,
+          "label": "frog",
+          "queries": 721
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/cat_7/007.png",
+          "file_32": "data/frames/cat_7/007_32.png",
+          "noise": "data/frames/cat_7/007_noise.png",
+          "noise_32": "data/frames/cat_7/007_noise_32.png",
+          "l2": 0.45372453331947327,
+          "label": "frog",
+          "queries": 963
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/cat_7/008.png",
+          "file_32": "data/frames/cat_7/008_32.png",
+          "noise": "data/frames/cat_7/008_noise.png",
+          "noise_32": "data/frames/cat_7/008_noise_32.png",
+          "l2": 0.3918744623661041,
+          "label": "frog",
+          "queries": 1226
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/cat_7/009.png",
+          "file_32": "data/frames/cat_7/009_32.png",
+          "noise": "data/frames/cat_7/009_noise.png",
+          "noise_32": "data/frames/cat_7/009_noise_32.png",
+          "l2": 0.35518625378608704,
+          "label": "frog",
+          "queries": 1509
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/cat_7/010.png",
+          "file_32": "data/frames/cat_7/010_32.png",
+          "noise": "data/frames/cat_7/010_noise.png",
+          "noise_32": "data/frames/cat_7/010_noise_32.png",
+          "l2": 0.3228859305381775,
+          "label": "frog",
+          "queries": 1810
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/cat_7/011.png",
+          "file_32": "data/frames/cat_7/011_32.png",
+          "noise": "data/frames/cat_7/011_noise.png",
+          "noise_32": "data/frames/cat_7/011_noise_32.png",
+          "l2": 0.2969273328781128,
+          "label": "frog",
+          "queries": 2129
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/cat_7/012.png",
+          "file_32": "data/frames/cat_7/012_32.png",
+          "noise": "data/frames/cat_7/012_noise.png",
+          "noise_32": "data/frames/cat_7/012_noise_32.png",
+          "l2": 0.283201664686203,
+          "label": "frog",
+          "queries": 2464
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/cat_7/013.png",
+          "file_32": "data/frames/cat_7/013_32.png",
+          "noise": "data/frames/cat_7/013_noise.png",
+          "noise_32": "data/frames/cat_7/013_noise_32.png",
+          "l2": 0.2677837014198303,
+          "label": "frog",
+          "queries": 2814
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/cat_7/014.png",
+          "file_32": "data/frames/cat_7/014_32.png",
+          "noise": "data/frames/cat_7/014_noise.png",
+          "noise_32": "data/frames/cat_7/014_noise_32.png",
+          "l2": 0.25988468527793884,
+          "label": "frog",
+          "queries": 3179
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/cat_7/015.png",
+          "file_32": "data/frames/cat_7/015_32.png",
+          "noise": "data/frames/cat_7/015_noise.png",
+          "noise_32": "data/frames/cat_7/015_noise_32.png",
+          "l2": 0.24959193170070648,
+          "label": "frog",
+          "queries": 3558
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/cat_7/016.png",
+          "file_32": "data/frames/cat_7/016_32.png",
+          "noise": "data/frames/cat_7/016_noise.png",
+          "noise_32": "data/frames/cat_7/016_noise_32.png",
+          "l2": 0.24365757405757904,
+          "label": "frog",
+          "queries": 3951
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/cat_7/017.png",
+          "file_32": "data/frames/cat_7/017_32.png",
+          "noise": "data/frames/cat_7/017_noise.png",
+          "noise_32": "data/frames/cat_7/017_noise_32.png",
+          "l2": 0.23576800525188446,
+          "label": "frog",
+          "queries": 4357
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/cat_7/018.png",
+          "file_32": "data/frames/cat_7/018_32.png",
+          "noise": "data/frames/cat_7/018_noise.png",
+          "noise_32": "data/frames/cat_7/018_noise_32.png",
+          "l2": 0.22740225493907928,
+          "label": "frog",
+          "queries": 4776
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/cat_7/019.png",
+          "file_32": "data/frames/cat_7/019_32.png",
+          "noise": "data/frames/cat_7/019_noise.png",
+          "noise_32": "data/frames/cat_7/019_noise_32.png",
+          "l2": 0.22705334424972534,
+          "label": "frog",
+          "queries": 4949
+        },
+        {
+          "stage": "final",
+          "file": "data/frames/cat_7/020.png",
+          "file_32": "data/frames/cat_7/020_32.png",
+          "noise": "data/frames/cat_7/020_noise.png",
+          "noise_32": "data/frames/cat_7/020_noise_32.png",
+          "l2": 0.24817675352096558,
+          "label": "frog",
+          "queries": 4956
+        }
+      ]
+    },
+    {
+      "name": "deer_7",
+      "true_label": "deer",
+      "start_source": "noise",
+      "clean": "data/frames/deer_7/clean.png",
+      "clean_32": "data/frames/deer_7/clean_32.png",
+      "frames": [
+        {
+          "stage": "start",
+          "file": "data/frames/deer_7/000.png",
+          "file_32": "data/frames/deer_7/000_32.png",
+          "noise": "data/frames/deer_7/000_noise.png",
+          "noise_32": "data/frames/deer_7/000_noise_32.png",
+          "l2": 21.95676040649414,
+          "label": "bird",
+          "queries": 1
+        },
+        {
+          "stage": "binary search",
+          "file": "data/frames/deer_7/001.png",
+          "file_32": "data/frames/deer_7/001_32.png",
+          "noise": "data/frames/deer_7/001_noise.png",
+          "noise_32": "data/frames/deer_7/001_noise_32.png",
+          "l2": 5.386407375335693,
+          "label": "bird",
+          "queries": 13
+        },
+        {
+          "stage": "binary search",
+          "file": "data/frames/deer_7/002.png",
+          "file_32": "data/frames/deer_7/002_32.png",
+          "noise": "data/frames/deer_7/002_noise.png",
+          "noise_32": "data/frames/deer_7/002_noise_32.png",
+          "l2": 5.361010551452637,
+          "label": "bird",
+          "queries": 31
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/deer_7/003.png",
+          "file_32": "data/frames/deer_7/003_32.png",
+          "noise": "data/frames/deer_7/003_noise.png",
+          "noise_32": "data/frames/deer_7/003_noise_32.png",
+          "l2": 2.116152763366699,
+          "label": "bird",
+          "queries": 150
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/deer_7/004.png",
+          "file_32": "data/frames/deer_7/004_32.png",
+          "noise": "data/frames/deer_7/004_noise.png",
+          "noise_32": "data/frames/deer_7/004_noise_32.png",
+          "l2": 1.3694782257080078,
+          "label": "bird",
+          "queries": 310
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/deer_7/005.png",
+          "file_32": "data/frames/deer_7/005_32.png",
+          "noise": "data/frames/deer_7/005_noise.png",
+          "noise_32": "data/frames/deer_7/005_noise_32.png",
+          "l2": 1.092747449874878,
+          "label": "bird",
+          "queries": 502
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/deer_7/006.png",
+          "file_32": "data/frames/deer_7/006_32.png",
+          "noise": "data/frames/deer_7/006_noise.png",
+          "noise_32": "data/frames/deer_7/006_noise_32.png",
+          "l2": 0.8865751028060913,
+          "label": "bird",
+          "queries": 721
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/deer_7/007.png",
+          "file_32": "data/frames/deer_7/007_32.png",
+          "noise": "data/frames/deer_7/007_noise.png",
+          "noise_32": "data/frames/deer_7/007_noise_32.png",
+          "l2": 0.7744330167770386,
+          "label": "bird",
+          "queries": 963
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/deer_7/008.png",
+          "file_32": "data/frames/deer_7/008_32.png",
+          "noise": "data/frames/deer_7/008_noise.png",
+          "noise_32": "data/frames/deer_7/008_noise_32.png",
+          "l2": 0.6653990149497986,
+          "label": "cat",
+          "queries": 1226
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/deer_7/009.png",
+          "file_32": "data/frames/deer_7/009_32.png",
+          "noise": "data/frames/deer_7/009_noise.png",
+          "noise_32": "data/frames/deer_7/009_noise_32.png",
+          "l2": 0.42020183801651,
+          "label": "cat",
+          "queries": 1509
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/deer_7/010.png",
+          "file_32": "data/frames/deer_7/010_32.png",
+          "noise": "data/frames/deer_7/010_noise.png",
+          "noise_32": "data/frames/deer_7/010_noise_32.png",
+          "l2": 0.3248859643936157,
+          "label": "cat",
+          "queries": 1810
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/deer_7/011.png",
+          "file_32": "data/frames/deer_7/011_32.png",
+          "noise": "data/frames/deer_7/011_noise.png",
+          "noise_32": "data/frames/deer_7/011_noise_32.png",
+          "l2": 0.25510677695274353,
+          "label": "cat",
+          "queries": 2129
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/deer_7/012.png",
+          "file_32": "data/frames/deer_7/012_32.png",
+          "noise": "data/frames/deer_7/012_noise.png",
+          "noise_32": "data/frames/deer_7/012_noise_32.png",
+          "l2": 0.20512917637825012,
+          "label": "cat",
+          "queries": 2464
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/deer_7/013.png",
+          "file_32": "data/frames/deer_7/013_32.png",
+          "noise": "data/frames/deer_7/013_noise.png",
+          "noise_32": "data/frames/deer_7/013_noise_32.png",
+          "l2": 0.1752527505159378,
+          "label": "cat",
+          "queries": 2814
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/deer_7/014.png",
+          "file_32": "data/frames/deer_7/014_32.png",
+          "noise": "data/frames/deer_7/014_noise.png",
+          "noise_32": "data/frames/deer_7/014_noise_32.png",
+          "l2": 0.15217283368110657,
+          "label": "cat",
+          "queries": 3179
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/deer_7/015.png",
+          "file_32": "data/frames/deer_7/015_32.png",
+          "noise": "data/frames/deer_7/015_noise.png",
+          "noise_32": "data/frames/deer_7/015_noise_32.png",
+          "l2": 0.13949687778949738,
+          "label": "cat",
+          "queries": 3558
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/deer_7/016.png",
+          "file_32": "data/frames/deer_7/016_32.png",
+          "noise": "data/frames/deer_7/016_noise.png",
+          "noise_32": "data/frames/deer_7/016_noise_32.png",
+          "l2": 0.12902867794036865,
+          "label": "cat",
+          "queries": 3951
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/deer_7/017.png",
+          "file_32": "data/frames/deer_7/017_32.png",
+          "noise": "data/frames/deer_7/017_noise.png",
+          "noise_32": "data/frames/deer_7/017_noise_32.png",
+          "l2": 0.1221272274851799,
+          "label": "cat",
+          "queries": 4357
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/deer_7/018.png",
+          "file_32": "data/frames/deer_7/018_32.png",
+          "noise": "data/frames/deer_7/018_noise.png",
+          "noise_32": "data/frames/deer_7/018_noise_32.png",
+          "l2": 0.11707858741283417,
+          "label": "cat",
+          "queries": 4776
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/deer_7/019.png",
+          "file_32": "data/frames/deer_7/019_32.png",
+          "noise": "data/frames/deer_7/019_noise.png",
+          "noise_32": "data/frames/deer_7/019_noise_32.png",
+          "l2": 0.11513025313615799,
+          "label": "cat",
+          "queries": 4949
+        },
+        {
+          "stage": "final",
+          "file": "data/frames/deer_7/020.png",
+          "file_32": "data/frames/deer_7/020_32.png",
+          "noise": "data/frames/deer_7/020_noise.png",
+          "noise_32": "data/frames/deer_7/020_noise_32.png",
+          "l2": 0.14199113845825195,
+          "label": "cat",
+          "queries": 4956
+        }
+      ]
+    },
+    {
+      "name": "ship_7",
+      "true_label": "ship",
+      "start_source": "noise",
+      "clean": "data/frames/ship_7/clean.png",
+      "clean_32": "data/frames/ship_7/clean_32.png",
+      "frames": [
+        {
+          "stage": "start",
+          "file": "data/frames/ship_7/000.png",
+          "file_32": "data/frames/ship_7/000_32.png",
+          "noise": "data/frames/ship_7/000_noise.png",
+          "noise_32": "data/frames/ship_7/000_noise_32.png",
+          "l2": 23.10305404663086,
+          "label": "bird",
+          "queries": 1
+        },
+        {
+          "stage": "binary search",
+          "file": "data/frames/ship_7/001.png",
+          "file_32": "data/frames/ship_7/001_32.png",
+          "noise": "data/frames/ship_7/001_noise.png",
+          "noise_32": "data/frames/ship_7/001_noise_32.png",
+          "l2": 4.965324401855469,
+          "label": "airplane",
+          "queries": 13
+        },
+        {
+          "stage": "binary search",
+          "file": "data/frames/ship_7/002.png",
+          "file_32": "data/frames/ship_7/002_32.png",
+          "noise": "data/frames/ship_7/002_noise.png",
+          "noise_32": "data/frames/ship_7/002_noise_32.png",
+          "l2": 4.962823867797852,
+          "label": "airplane",
+          "queries": 31
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/ship_7/003.png",
+          "file_32": "data/frames/ship_7/003_32.png",
+          "noise": "data/frames/ship_7/003_noise.png",
+          "noise_32": "data/frames/ship_7/003_noise_32.png",
+          "l2": 2.623871326446533,
+          "label": "airplane",
+          "queries": 150
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/ship_7/004.png",
+          "file_32": "data/frames/ship_7/004_32.png",
+          "noise": "data/frames/ship_7/004_noise.png",
+          "noise_32": "data/frames/ship_7/004_noise_32.png",
+          "l2": 1.3972305059432983,
+          "label": "airplane",
+          "queries": 310
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/ship_7/005.png",
+          "file_32": "data/frames/ship_7/005_32.png",
+          "noise": "data/frames/ship_7/005_noise.png",
+          "noise_32": "data/frames/ship_7/005_noise_32.png",
+          "l2": 0.8998759388923645,
+          "label": "airplane",
+          "queries": 502
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/ship_7/006.png",
+          "file_32": "data/frames/ship_7/006_32.png",
+          "noise": "data/frames/ship_7/006_noise.png",
+          "noise_32": "data/frames/ship_7/006_noise_32.png",
+          "l2": 0.6838662028312683,
+          "label": "airplane",
+          "queries": 721
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/ship_7/007.png",
+          "file_32": "data/frames/ship_7/007_32.png",
+          "noise": "data/frames/ship_7/007_noise.png",
+          "noise_32": "data/frames/ship_7/007_noise_32.png",
+          "l2": 0.5605473518371582,
+          "label": "airplane",
+          "queries": 963
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/ship_7/008.png",
+          "file_32": "data/frames/ship_7/008_32.png",
+          "noise": "data/frames/ship_7/008_noise.png",
+          "noise_32": "data/frames/ship_7/008_noise_32.png",
+          "l2": 0.47198644280433655,
+          "label": "airplane",
+          "queries": 1226
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/ship_7/009.png",
+          "file_32": "data/frames/ship_7/009_32.png",
+          "noise": "data/frames/ship_7/009_noise.png",
+          "noise_32": "data/frames/ship_7/009_noise_32.png",
+          "l2": 0.41365325450897217,
+          "label": "airplane",
+          "queries": 1509
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/ship_7/010.png",
+          "file_32": "data/frames/ship_7/010_32.png",
+          "noise": "data/frames/ship_7/010_noise.png",
+          "noise_32": "data/frames/ship_7/010_noise_32.png",
+          "l2": 0.376150518655777,
+          "label": "airplane",
+          "queries": 1810
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/ship_7/011.png",
+          "file_32": "data/frames/ship_7/011_32.png",
+          "noise": "data/frames/ship_7/011_noise.png",
+          "noise_32": "data/frames/ship_7/011_noise_32.png",
+          "l2": 0.35058891773223877,
+          "label": "airplane",
+          "queries": 2129
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/ship_7/012.png",
+          "file_32": "data/frames/ship_7/012_32.png",
+          "noise": "data/frames/ship_7/012_noise.png",
+          "noise_32": "data/frames/ship_7/012_noise_32.png",
+          "l2": 0.32517504692077637,
+          "label": "airplane",
+          "queries": 2464
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/ship_7/013.png",
+          "file_32": "data/frames/ship_7/013_32.png",
+          "noise": "data/frames/ship_7/013_noise.png",
+          "noise_32": "data/frames/ship_7/013_noise_32.png",
+          "l2": 0.31161847710609436,
+          "label": "airplane",
+          "queries": 2814
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/ship_7/014.png",
+          "file_32": "data/frames/ship_7/014_32.png",
+          "noise": "data/frames/ship_7/014_noise.png",
+          "noise_32": "data/frames/ship_7/014_noise_32.png",
+          "l2": 0.29984235763549805,
+          "label": "airplane",
+          "queries": 3179
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/ship_7/015.png",
+          "file_32": "data/frames/ship_7/015_32.png",
+          "noise": "data/frames/ship_7/015_noise.png",
+          "noise_32": "data/frames/ship_7/015_noise_32.png",
+          "l2": 0.2904420495033264,
+          "label": "airplane",
+          "queries": 3558
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/ship_7/016.png",
+          "file_32": "data/frames/ship_7/016_32.png",
+          "noise": "data/frames/ship_7/016_noise.png",
+          "noise_32": "data/frames/ship_7/016_noise_32.png",
+          "l2": 0.28006502985954285,
+          "label": "airplane",
+          "queries": 3951
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/ship_7/017.png",
+          "file_32": "data/frames/ship_7/017_32.png",
+          "noise": "data/frames/ship_7/017_noise.png",
+          "noise_32": "data/frames/ship_7/017_noise_32.png",
+          "l2": 0.2733025848865509,
+          "label": "airplane",
+          "queries": 4357
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/ship_7/018.png",
+          "file_32": "data/frames/ship_7/018_32.png",
+          "noise": "data/frames/ship_7/018_noise.png",
+          "noise_32": "data/frames/ship_7/018_noise_32.png",
+          "l2": 0.2666597366333008,
+          "label": "airplane",
+          "queries": 4776
+        },
+        {
+          "stage": "boundary walk",
+          "file": "data/frames/ship_7/019.png",
+          "file_32": "data/frames/ship_7/019_32.png",
+          "noise": "data/frames/ship_7/019_noise.png",
+          "noise_32": "data/frames/ship_7/019_noise_32.png",
+          "l2": 0.26635029911994934,
+          "label": "airplane",
+          "queries": 4949
+        },
+        {
+          "stage": "final",
+          "file": "data/frames/ship_7/020.png",
+          "file_32": "data/frames/ship_7/020_32.png",
+          "noise": "data/frames/ship_7/020_noise.png",
+          "noise_32": "data/frames/ship_7/020_noise_32.png",
+          "l2": 0.28892141580581665,
+          "label": "airplane",
+          "queries": 4956
+        }
+      ]
+    }
+  ]
+}

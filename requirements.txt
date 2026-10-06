@@ -1,0 +1,10 @@
+# Tested with Python 3.11.9 on Windows, CUDA 12.4 (RTX 4070). CPU works too, just slower.
+# For GPU wheels: pip install torch==2.6.0 torchvision==0.21.0 --index-url https://download.pytorch.org/whl/cu124
+torch==2.6.0
+torchvision==0.21.0
+numpy==1.26.4
+pillow==11.3.0
+scikit-image==0.26.0
+matplotlib==3.10.3
+jupyter==1.1.1
+nbconvert==7.16.6

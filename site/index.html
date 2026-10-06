@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- EDIT: page title and description -->
+  <title>Fooling an image classifier that only tells you its answer</title>
+  <meta name="description" content="A hard-label black-box adversarial attack on a CIFAR-10 image classifier, explained in plain language.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+<main>
+
+  <!-- ============================================================
+       01 · Title and summary
+       ============================================================ -->
+  <header class="section" id="top">
+    <p class="section-num">01</p>
+    <!-- EDIT: project title, team, hackathon -->
+    <h1>Fooling an image classifier that only tells you its answer</h1>
+    <p class="byline">[Team name] &middot; [Hackathon name] &middot; 2026</p>
+    <p class="lede">
+      We were given an image classifier we could not look inside. All it would tell us was its answer: "cat", "ship", "frog".
+      We changed each of 1000 photos so slightly that a person sees no difference, yet the classifier gets every one of them wrong.
+    </p>
+    <!-- Filled from data/results.json (the "final" entry) -->
+    <dl class="figures" id="key-figures">
+      <div><dt>Images fooled</dt><dd data-key="success">&mdash;</dd></div>
+      <div><dt>Average L2 noise</dt><dd data-key="l2">&mdash;</dd></div>
+      <div><dt>Average SSIM</dt><dd data-key="ssim">&mdash;</dd></div>
+      <div><dt>Queries per image</dt><dd data-key="queries">&mdash;</dd></div>
+    </dl>
+  </header>
+
+  <!-- ============================================================
+       02 · The model
+       ============================================================ -->
+  <section class="section reveal" id="model">
+    <p class="section-num">02</p>
+    <h2>The model we are attacking</h2>
+    <p>
+      The target is a convolutional neural network (CNN) trained on CIFAR-10, a standard collection of small photos.
+      It looks at a 32&times;32-pixel colour photo and says which of ten things it shows:
+      <span class="mono">airplane, automobile, bird, cat, deer, dog, frog, horse, ship, truck</span>.
+    </p>
+    <p>
+      We were given 1000 photos, 100 of each kind. Before any attack, the model gets
+      <span class="mono" data-bind="misclassified">&mdash;</span> of the 1000 wrong. Below are a few of them with the model's answer.
+    </p>
+    <div class="wide">
+      <div class="image-grid" id="model-grid" aria-label="Example photos with the model's predictions"></div>
+    </div>
+    <p class="note" data-empty="model-grid" hidden>Example images will appear here once <span class="mono">data/model_demo.json</span> is exported.</p>
+  </section>
+
+  <!-- ============================================================
+       03 · What is an adversarial example?
+       ============================================================ -->
+  <section class="section reveal" id="adversarial">
+    <p class="section-num">03</p>
+    <h2>What is an adversarial example?</h2>
+    <p>
+      An adversarial example is a photo with a tiny, carefully chosen change added to it. The change is too small for a person to notice,
+      but it makes the model give a wrong answer. Below, the middle picture is that change, made ten times stronger so you can see it.
+      Grey means "nothing changed".
+    </p>
+    <div class="wide">
+      <div class="equation" id="intro-example"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       04 · Types of attacks
+       ============================================================ -->
+  <section class="section reveal" id="types">
+    <p class="section-num">04</p>
+    <h2>Types of adversarial attacks</h2>
+    <p>
+      Attacks are usually described by four choices. Each one changes how much the attacker knows or what they are trying to achieve.
+      The last column shows our situation.
+    </p>
+    <div class="table-wrap">
+      <table class="compare">
+        <thead>
+          <tr><th scope="col">Question</th><th scope="col">Easier for the attacker</th><th scope="col">Harder for the attacker</th><th scope="col">Ours</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">What can the attacker see?</th>
+            <td data-label="Easier"><strong>White-box</strong>: the model's internals, including its weights and gradients</td>
+            <td data-label="Harder"><strong>Black-box</strong>: only what goes in and what comes out</td>
+            <td class="ours" data-label="Ours">Black-box</td>
+          </tr>
+          <tr>
+            <th scope="row">What does the model return?</th>
+            <td data-label="Easier"><strong>Score-based</strong>: a probability for every class ("cat 81%, dog 12%&hellip;")</td>
+            <td data-label="Harder"><strong>Decision-based / hard-label</strong>: only the top answer ("cat")</td>
+            <td class="ours" data-label="Ours">Hard-label</td>
+          </tr>
+          <tr>
+            <th scope="row">What is the goal?</th>
+            <td data-label="Easier"><strong>Untargeted</strong>: any wrong answer will do</td>
+            <td data-label="Harder"><strong>Targeted</strong>: one specific wrong answer, chosen in advance</td>
+            <td class="ours" data-label="Ours">Untargeted</td>
+          </tr>
+          <tr>
+            <th scope="row">How is the attack found?</th>
+            <td data-label="Easier"><strong>Transfer-based</strong>: attack your own copy of a model and hope it carries over</td>
+            <td data-label="Harder"><strong>Query-based</strong>: ask the real model many times and learn from its answers</td>
+            <td class="ours" data-label="Ours">Query-based</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p>
+      In what we could <em>see</em>, this is the most restricted setting there is: no internals, no scores, just one word per question.
+      Our goal, untargeted, is the easier of the two goals. Any wrong answer counts.
+    </p>
+  </section>
+
+  <!-- ============================================================
+       05 · Rules
+       ============================================================ -->
+  <section class="section reveal" id="rules">
+    <p class="section-num">05</p>
+    <h2>The rules of our challenge</h2>
+    <div class="two-col">
+      <div>
+        <h3>Allowed</h3>
+        <ul class="plain">
+          <li>Send a photo to the model and read its answer</li>
+          <li>Do this as many times as needed (fewer is better)</li>
+          <li>Use the clean photos we were given</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Not allowed</h3>
+        <ul class="plain">
+          <li>Looking at the model's weights or architecture</li>
+          <li>Looking at its internal layers or gradients</li>
+          <li>Looking at its probabilities or scores</li>
+        </ul>
+      </div>
+    </div>
+    <h3>How we are scored</h3>
+    <!-- EDIT: scoring details if the organisers change them -->
+    <table class="scoring">
+      <tbody>
+        <tr><td class="mono">50%</td><td>Attack success rate: how many saved images the model gets wrong</td></tr>
+        <tr><td class="mono">50%</td><td>Imperceptibility: how invisible the changes are</td></tr>
+        <tr><td class="mono">tie-break</td><td>Fewer queries to the model, and a larger change in the model's confidence</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Every adversarial image must be saved as a normal PNG file, one per original photo, named like <span class="mono">cat_5_adv.png</span>.</p>
+  </section>
+
+  <!-- ============================================================
+       06 · How the attack works
+       ============================================================ -->
+  <section class="section reveal" id="how">
+    <p class="section-num">06</p>
+    <h2>How our attack works</h2>
+    <p>
+      Think of every possible photo as a point on a huge map. The model has divided the map into ten regions, one per answer.
+      The line between two regions is the <em>decision boundary</em>. Our clean cat photo sits inside the "cat" region.
+      We want the closest point just across the line: close means a small change, and across the line means a wrong answer.
+      The catch is that we cannot see the map. We can only ask, for any point, "which region is this?"
+    </p>
+
+    <figure class="wide diagram">
+      <!-- Hand-drawn schematic; coordinates are illustrative, not real data -->
+      <svg viewBox="0 0 640 360" role="img" aria-labelledby="diag-title diag-desc">
+        <title id="diag-title">Decision boundary diagram</title>
+        <desc id="diag-desc">The clean image sits in the correct region. The attack starts from a wrong-class point, binary-searches to the boundary, then walks along the boundary toward the point closest to the clean image.</desc>
+        <path class="region-correct" d="M0 0 H400 V30 Q200 190 400 340 V360 H0 Z"/>
+        <path class="boundary" d="M400 30 Q200 190 400 340"/>
+        <text class="region-label" x="24" y="34">region: "cat" (correct)</text>
+        <text class="region-label" x="616" y="346" text-anchor="end">region: "frog" (wrong)</text>
+        <text class="small-label" x="368" y="300">decision boundary</text>
+
+        <!-- step 2: straight line between clean and start -->
+        <line class="guide" x1="120" y1="235" x2="492" y2="26"/>
+        <!-- final noise -->
+        <line class="final-line" x1="120" y1="235" x2="301.5" y2="206.4"/>
+
+        <!-- step 3: walk along the boundary (zig-zag: step outward, come back to the line) -->
+        <polyline class="walk" points="316,125.1 334,140 307.3,145.5 324,160 301.9,165.9 318,180 300,186.2 316,200 301.5,206.4"/>
+
+        <!-- points -->
+        <circle class="pt-start" cx="492" cy="26" r="7"/>
+        <circle class="pt-bs" cx="316" cy="125.1" r="6"/>
+        <circle class="pt-final" cx="301.5" cy="206.4" r="7"/>
+        <circle class="pt-clean" cx="120" cy="235" r="8"/>
+
+        <!-- labels -->
+        <text class="pt-label" x="480" y="22" text-anchor="end">1  start: any wrong photo</text>
+        <text class="pt-label" x="304" y="118" text-anchor="end">2  after binary search</text>
+        <text class="pt-label" x="344" y="168">3  walk along the line</text>
+        <text class="pt-label" x="312" y="226">4  final: closest wrong point</text>
+        <text class="pt-label" x="120" y="262" text-anchor="middle">clean photo</text>
+        <text class="small-label" x="200" y="208" text-anchor="middle">noise we add</text>
+      </svg>
+      <figcaption>A sketch, not real data. The real map has 3072 dimensions, one for each pixel colour value.</figcaption>
+    </figure>
+
+    <ol class="steps">
+      <li>
+        <h3>Find any photo the model gets wrong</h3>
+        <p>We try random static until the model calls it something other than the true class. If that fails, we use the nearest photo of another class. This is our starting point. It is wrong, but very far from the original.</p>
+      </li>
+      <li>
+        <h3>Binary search to the boundary</h3>
+        <p>We blend the clean photo and the starting point. Halfway still wrong? Move closer to the clean photo. Correct again? Move back. About a dozen questions land us right on the boundary.</p>
+      </li>
+      <li>
+        <h3>Walk along the boundary toward the clean photo</h3>
+        <p>This is HopSkipJumpAttack. Around the current point we ask about a hundred slightly jiggled versions. From which ones come back "wrong" and which come back "right", we estimate which way the boundary runs. Then we step along it and search back onto the line. Each step makes the change smaller.</p>
+      </li>
+      <li>
+        <h3>Polish</h3>
+        <p>We tested three refinements: smoother low-frequency noise, hiding the noise in busy textured areas, and a small safety margin past the boundary. We kept only those that helped. Section 07 has the numbers.</p>
+      </li>
+      <li>
+        <h3>Save and check again</h3>
+        <p>PNG files store whole numbers from 0 to 255, so saving rounds every pixel. That rounding can undo a very small change. We reload every saved file, ask the model again, and push any image that slipped back a little further.</p>
+      </li>
+    </ol>
+
+    <!-- Interactive animation, filled from data/frames.json -->
+    <div class="wide player" id="player">
+      <div class="player-head">
+        <p class="player-title">Watch the attack on one photo</p>
+        <div class="tabs" id="player-tabs" role="tablist" aria-label="Choose an example"></div>
+      </div>
+      <div class="player-panels">
+        <figure>
+          <img id="pl-image" class="px" width="160" height="160" alt="Current adversarial image">
+          <figcaption>current image</figcaption>
+        </figure>
+        <figure>
+          <img id="pl-noise" class="px" width="160" height="160" alt="Change from the clean image, magnified ten times">
+          <figcaption>change &times;10</figcaption>
+        </figure>
+        <figure>
+          <img id="pl-clean" class="px" width="160" height="160" alt="Clean image">
+          <figcaption>original</figcaption>
+        </figure>
+        <div class="pl-answer">
+          <p class="pl-answer-label">model says</p>
+          <p class="pl-answer-value mono" id="pl-label">&mdash;</p>
+          <p class="pl-answer-true mono" id="pl-true"></p>
+        </div>
+      </div>
+      <div class="player-controls">
+        <button type="button" id="pl-play" class="btn">Play</button>
+        <input type="range" id="pl-slider" min="0" max="0" value="0" aria-label="Frame">
+        <span class="mono" id="pl-count">0 / 0</span>
+      </div>
+      <dl class="player-stats">
+        <div><dt>stage</dt><dd class="mono" id="pl-stage">&mdash;</dd></div>
+        <div><dt>L2 distance</dt><dd class="mono" id="pl-l2">&mdash;</dd></div>
+        <div><dt>queries used</dt><dd class="mono" id="pl-queries">&mdash;</dd></div>
+      </dl>
+      <svg id="pl-chart" class="chart" viewBox="0 0 640 220" preserveAspectRatio="xMinYMin meet" role="img" aria-label="L2 distance against queries used"></svg>
+      <p class="note" id="player-empty" hidden>The animation will appear here once <span class="mono">data/frames.json</span> is exported.</p>
+    </div>
+
+    <details>
+      <summary>Technical detail: the maths, simply</summary>
+      <div class="details-body">
+        <p><strong>The change.</strong> Each photo is a list of 3072 numbers between 0 and 1. The adversarial photo is
+          <span class="mono">x<sub>adv</sub> = x + &delta;</span>, where <span class="mono">&delta;</span> is the change we add.
+          We want <span class="mono">&delta;</span> as small as possible while the model's answer differs from the true label.</p>
+        <p><strong>Binary search.</strong> For a blend weight <span class="mono">&alpha;</span> between 0 and 1, we test
+          <span class="mono">x(&alpha;) = (1 &minus; &alpha;)&middot;x + &alpha;&middot;x<sub>start</sub></span>.
+          If <span class="mono">x(&alpha;)</span> is still wrong we lower <span class="mono">&alpha;</span>, otherwise we raise it.
+          Each question halves the interval.</p>
+        <p><strong>Boundary direction from labels only (HSJA).</strong> At a point <span class="mono">b</span> on the boundary we draw
+          <span class="mono">n</span> random directions <span class="mono">u<sub>1</sub>&hellip;u<sub>n</sub></span>, ask about
+          <span class="mono">b + &delta;&middot;u<sub>i</sub></span>, and score each answer +1 (wrong) or &minus;1 (right).
+          The average of <span class="mono">score<sub>i</sub>&middot;u<sub>i</sub></span>, after subtracting the mean score, points away from the
+          correct region, roughly perpendicular to the boundary. We step along it, then binary-search back to the boundary.
+          The number of directions grows each round (100&middot;&radic;t).</p>
+        <p><strong>Measuring the change.</strong></p>
+        <ul class="plain">
+          <li><span class="mono">L2</span>: overall size of the change, the square root of the sum of squared pixel differences (pixels from 0 to 1). Lower is better.</li>
+          <li><span class="mono">L&infin;</span>: the biggest change to any single pixel value. Lower is better.</li>
+          <li><span class="mono">SSIM</span>: structural similarity, 1.0 means identical to the eye. Higher is better.</li>
+          <li><span class="mono">PSNR</span>: signal-to-noise ratio in decibels. Above about 40 dB the change is generally invisible.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+
+  <!-- ============================================================
+       07 · Methods compared
+       ============================================================ -->
+  <section class="section reveal" id="methods">
+    <p class="section-num">07</p>
+    <h2>Methods we compared</h2>
+    <p>
+      We ran three published decision-based attacks on the same 50 photos, starting from the same points and with the same number of questions
+      per photo. The best value in each column is in bold. Baseline is the starting point alone (steps 1 and 2 above), so it isn't ranked.
+    </p>
+    <div class="budget-switch" id="budget-switch" role="group" aria-label="Queries per image"></div>
+    <div class="table-wrap">
+      <table class="results" id="results-table">
+        <thead>
+          <tr>
+            <th scope="col">Method</th><th scope="col" class="num">Images</th><th scope="col" class="num">Success</th><th scope="col" class="num">L2</th>
+            <th scope="col" class="num">L&infin;</th><th scope="col" class="num">SSIM</th><th scope="col" class="num">PSNR</th><th scope="col" class="num">Queries</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <!-- EDIT: reasoning for the final choice -->
+    <p>
+      HopSkipJumpAttack (HSJA) left the smallest change at every budget from about 700 questions upward, so we built on it.
+      SurFree was slightly better with very few questions. CGBA stalled early on these small images.
+      The final row is the complete submission: all 1000 photos, with the improvements below.
+    </p>
+
+    <h3>What each refinement did</h3>
+    <p>Each change was tested on top of the ones kept before it, on the same 50 photos at 5000 questions each.</p>
+    <div class="table-wrap">
+      <table class="results" id="improvements-table">
+        <thead>
+          <tr><th scope="col">Step</th><th scope="col" class="num">L2</th><th scope="col" class="num">SSIM</th><th scope="col" class="num">Robust<span class="th-note">*</span></th><th scope="col">Kept</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="note">* Share of images still fooled after random &plusmn;1/255 changes to 5% of their pixel values: a test of how far past the boundary they sit.</p>
+  </section>
+
+  <!-- ============================================================
+       08 · Before and after
+       ============================================================ -->
+  <section class="section reveal" id="results">
+    <p class="section-num">08</p>
+    <h2>Results: before and after</h2>
+    <p>
+      Eight photos from our final submission. Press and hold the right-hand image, or focus it and hold the space bar,
+      to swap it with the original. They look the same, but the model's answers differ.
+    </p>
+    <div class="wide">
+      <div class="pairs" id="pairs"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       09 · Challenges and limitations
+       ============================================================ -->
+  <section class="section reveal" id="limits">
+    <p class="section-num">09</p>
+    <h2>Challenges and limitations</h2>
+    <!-- EDIT: this section is a starting point; adjust freely -->
+    <ul class="plain spaced">
+      <li><strong>Rounding can undo an attack.</strong> Saved images store whole numbers from 0 to 255. Some of our changes were smaller than a single step, so saving erased them. We had to make every change survive rounding, and check it again after saving.</li>
+      <li><strong>The same model can answer differently.</strong> On graphics cards, a faster lower-precision mode (TF32) can flip the answer for an image right on the boundary, depending on how many images are checked together. We used full precision and a small safety margin, and confirmed every image on both the graphics card and the CPU.</li>
+      <li><strong>Noise against questions.</strong> More questions buy a smaller change, but each one costs time and counts against us in a tie-break. Going from 1000 to 5000 questions per photo shrank our median change to about a third.</li>
+      <li><strong>We don't know the exact scoring metric.</strong> "Imperceptibility" could mean L2, L&infin;, SSIM or something else. Hiding noise in textured areas raised SSIM slightly but made L2 larger, so the best choice depends on the metric.</li>
+      <li><strong>Some photos are much harder than others.</strong> A few need almost no change; others, often plain backgrounds or high-contrast objects, need many times more.</li>
+    </ul>
+  </section>
+
+  <!-- ============================================================
+       10 · Why this matters
+       ============================================================ -->
+  <section class="section reveal" id="why">
+    <p class="section-num">10</p>
+    <h2>Why this matters</h2>
+    <p>
+      Image classifiers increasingly make real decisions: moderating uploads, reading road signs, checking identity documents.
+      Often all an outsider can do is submit an input and see the decision. That is exactly the setting here.
+      Showing that a handful of questions and an invisible change are enough to flip the answer is a reminder that accuracy on clean photos says little about security.
+      The same method works as a test: anyone building a defence can run label-only attacks like this one against it and measure how much change it takes to break.
+    </p>
+  </section>
+
+  <!-- ============================================================
+       11 · References
+       ============================================================ -->
+  <section class="section reveal" id="refs">
+    <p class="section-num">11</p>
+    <h2>References and links</h2>
+    <!-- EDIT: repository link -->
+    <p>Code: <a href="https://github.com/akshitag001/FOOLML">github.com/akshitag001/FOOLML</a></p>
+    <ol class="refs">
+      <li>Chen, Jordan, Wainwright. <a href="https://arxiv.org/abs/1904.02144">HopSkipJumpAttack: A Query-Efficient Decision-Based Attack</a>. IEEE S&amp;P, 2020.</li>
+      <li>Maho, Furon, Le Merrer. <a href="https://arxiv.org/abs/2011.12807">SurFree: a fast surrogate-free black-box attack</a>. CVPR, 2021.</li>
+      <li>Reza, Rahmati, Wu, Bayat. <a href="https://arxiv.org/abs/2308.03163">CGBA: Curvature-aware Geometric Black-box Attack</a>. ICCV, 2023.</li>
+      <li>Cheng, Singh, Chen, Chen, Liu, Hsieh. <a href="https://arxiv.org/abs/1909.10773">Sign-OPT: A Query-Efficient Hard-label Adversarial Attack</a>. ICLR, 2020.</li>
+      <li>Rahmati, Moosavi-Dezfooli, Frossard, Dai. <a href="https://arxiv.org/abs/2003.06468">GeoDA: a geometric framework for black-box adversarial attacks</a>. CVPR, 2020.</li>
+      <li>Brendel, Rauber, Bethge. <a href="https://arxiv.org/abs/1712.04248">Decision-Based Adversarial Attacks: Reliable Attacks Against Black-Box Machine Learning Models</a>. ICLR, 2018.</li>
+      <li>Szegedy et al. <a href="https://arxiv.org/abs/1312.6199">Intriguing properties of neural networks</a>. ICLR, 2014.</li>
+      <li>Goodfellow, Shlens, Szegedy. <a href="https://arxiv.org/abs/1412.6572">Explaining and Harnessing Adversarial Examples</a>. ICLR, 2015.</li>
+      <li>Krizhevsky. <a href="https://www.cs.toronto.edu/~kriz/cifar.html">Learning Multiple Layers of Features from Tiny Images</a> (CIFAR-10), 2009.</li>
+    </ol>
+  </section>
+
+</main>
+
+<!-- EDIT: footer -->
+<footer class="site-footer">
+  <p>[Team member names] &middot; [Institution] &middot; [Hackathon name] 2026</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "attack": "final",
+  "description": "HSJA {'opts': {'low_freq': None, 'texture': 1.0}, 'multi_start': False, 'margin': 0.05}, 5000 queries/image",
+  "n_images": 1000,
+  "success_rate": 1.0,
+  "avg_L2": 0.36297537222390314,
+  "avg_Linf": 0.06135294861253351,
+  "avg_SSIM": 0.9976981705839563,
+  "avg_PSNR": 45.86115367652763,
+  "avg_queries": 4956.19921875,
+  "total_queries": 4956199,
+  "fixed_after_saving": 2,
+  "all_contexts": 1000,
+  "jitter_survival": 0.9580000042915344
+}

@@ -1,0 +1,134 @@
+{
+  "log": [
+    {
+      "attack": "0_hsja",
+      "description": "HSJA (1% margin)",
+      "n_images": 50,
+      "success_rate": 1.0,
+      "avg_L2": 0.2879237717695694,
+      "avg_Linf": 0.025411780774593353,
+      "avg_SSIM": 0.9969383595991139,
+      "avg_PSNR": 48.74712374215902,
+      "avg_queries": 4956.47998046875,
+      "contexts": 50,
+      "jitter": 0.76
+    },
+    {
+      "attack": "1_lowfreq_16",
+      "description": "+ low-frequency directions (16x16 DCT)",
+      "n_images": 50,
+      "success_rate": 1.0,
+      "avg_L2": 0.4665364953094613,
+      "avg_Linf": 0.04619608744978905,
+      "avg_SSIM": 0.99288742826881,
+      "avg_PSNR": 44.79354649689015,
+      "avg_queries": 4956.1201171875,
+      "contexts": 50,
+      "jitter": 0.76
+    },
+    {
+      "attack": "1_lowfreq_8",
+      "description": "+ low-frequency directions (8x8 DCT)",
+      "n_images": 50,
+      "success_rate": 1.0,
+      "avg_L2": 0.8922360798359396,
+      "avg_Linf": 0.07168627869337797,
+      "avg_SSIM": 0.9793736422362036,
+      "avg_PSNR": 39.05379315552094,
+      "avg_queries": 4955.919921875,
+      "contexts": 50,
+      "jitter": 0.82
+    },
+    {
+      "attack": "2_multistart",
+      "description": "+ best of several starting points",
+      "n_images": 50,
+      "success_rate": 1.0,
+      "avg_L2": 0.2948328675344596,
+      "avg_Linf": 0.02674511253833771,
+      "avg_SSIM": 0.9969600476748307,
+      "avg_PSNR": 48.55547752153662,
+      "avg_queries": 4956.68017578125,
+      "contexts": 50,
+      "jitter": 0.8
+    },
+    {
+      "attack": "3_texture_0.5",
+      "description": "+ texture-weighted directions (p=0.5)",
+      "n_images": 50,
+      "success_rate": 1.0,
+      "avg_L2": 0.3094891431114321,
+      "avg_Linf": 0.03670589178800583,
+      "avg_SSIM": 0.9978196454993727,
+      "avg_PSNR": 48.12149842317934,
+      "avg_queries": 4956.31982421875,
+      "contexts": 50,
+      "jitter": 0.78
+    },
+    {
+      "attack": "3_texture_1.0",
+      "description": "+ texture-weighted directions (p=1.0)",
+      "n_images": 50,
+      "success_rate": 1.0,
+      "avg_L2": 0.3650946127075879,
+      "avg_Linf": 0.058431381508708,
+      "avg_SSIM": 0.9979085826491212,
+      "avg_PSNR": 46.63638305103379,
+      "avg_queries": 4956.2998046875,
+      "contexts": 50,
+      "jitter": 0.76
+    },
+    {
+      "attack": "4_margin_0pct",
+      "description": "margin 0%",
+      "n_images": 50,
+      "success_rate": 1.0,
+      "avg_L2": 0.3616794630898278,
+      "avg_Linf": 0.058039224669337273,
+      "avg_SSIM": 0.9979463587671146,
+      "avg_PSNR": 46.74120670852709,
+      "avg_queries": 4956.2998046875,
+      "contexts": 48,
+      "jitter": 0.34
+    },
+    {
+      "attack": "4_margin_2pct",
+      "description": "margin 2%",
+      "n_images": 50,
+      "success_rate": 1.0,
+      "avg_L2": 0.36866046790868984,
+      "avg_Linf": 0.058901969119906424,
+      "avg_SSIM": 0.9978680672211562,
+      "avg_PSNR": 46.55003508212708,
+      "avg_queries": 4956.2998046875,
+      "contexts": 50,
+      "jitter": 0.82
+    },
+    {
+      "attack": "4_margin_5pct",
+      "description": "margin 5%",
+      "n_images": 50,
+      "success_rate": 1.0,
+      "avg_L2": 0.3794550797594738,
+      "avg_Linf": 0.060862753614783285,
+      "avg_SSIM": 0.9977473103743647,
+      "avg_PSNR": 46.25509284945792,
+      "avg_queries": 4956.2998046875,
+      "contexts": 50,
+      "jitter": 0.94
+    }
+  ],
+  "kept": [
+    "0_hsja",
+    "3_texture_1.0",
+    "4_margin_5pct"
+  ],
+  "final": {
+    "opts": {
+      "low_freq": null,
+      "texture": 1.0
+    },
+    "multi_start": false,
+    "margin": 0.05
+  }
+}

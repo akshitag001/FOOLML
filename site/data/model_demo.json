@@ -1,0 +1,146 @@
+{
+  "n_images": 1000,
+  "n_misclassified_clean": 0,
+  "images": [
+    {
+      "name": "airplane_0",
+      "file": "data/clean/airplane_0.png",
+      "file_32": "data/clean/airplane_0_32.png",
+      "true_label": "airplane",
+      "predicted_label": "airplane"
+    },
+    {
+      "name": "airplane_1",
+      "file": "data/clean/airplane_1.png",
+      "file_32": "data/clean/airplane_1_32.png",
+      "true_label": "airplane",
+      "predicted_label": "airplane"
+    },
+    {
+      "name": "automobile_0",
+      "file": "data/clean/automobile_0.png",
+      "file_32": "data/clean/automobile_0_32.png",
+      "true_label": "automobile",
+      "predicted_label": "automobile"
+    },
+    {
+      "name": "automobile_1",
+      "file": "data/clean/automobile_1.png",
+      "file_32": "data/clean/automobile_1_32.png",
+      "true_label": "automobile",
+      "predicted_label": "automobile"
+    },
+    {
+      "name": "bird_0",
+      "file": "data/clean/bird_0.png",
+      "file_32": "data/clean/bird_0_32.png",
+      "true_label": "bird",
+      "predicted_label": "bird"
+    },
+    {
+      "name": "bird_1",
+      "file": "data/clean/bird_1.png",
+      "file_32": "data/clean/bird_1_32.png",
+      "true_label": "bird",
+      "predicted_label": "bird"
+    },
+    {
+      "name": "cat_0",
+      "file": "data/clean/cat_0.png",
+      "file_32": "data/clean/cat_0_32.png",
+      "true_label": "cat",
+      "predicted_label": "cat"
+    },
+    {
+      "name": "cat_1",
+      "file": "data/clean/cat_1.png",
+      "file_32": "data/clean/cat_1_32.png",
+      "true_label": "cat",
+      "predicted_label": "cat"
+    },
+    {
+      "name": "deer_0",
+      "file": "data/clean/deer_0.png",
+      "file_32": "data/clean/deer_0_32.png",
+      "true_label": "deer",
+      "predicted_label": "deer"
+    },
+    {
+      "name": "deer_1",
+      "file": "data/clean/deer_1.png",
+      "file_32": "data/clean/deer_1_32.png",
+      "true_label": "deer",
+      "predicted_label": "deer"
+    },
+    {
+      "name": "dog_0",
+      "file": "data/clean/dog_0.png",
+      "file_32": "data/clean/dog_0_32.png",
+      "true_label": "dog",
+      "predicted_label": "dog"
+    },
+    {
+      "name": "dog_1",
+      "file": "data/clean/dog_1.png",
+      "file_32": "data/clean/dog_1_32.png",
+      "true_label": "dog",
+      "predicted_label": "dog"
+    },
+    {
+      "name": "frog_0",
+      "file": "data/clean/frog_0.png",
+      "file_32": "data/clean/frog_0_32.png",
+      "true_label": "frog",
+      "predicted_label": "frog"
+    },
+    {
+      "name": "frog_1",
+      "file": "data/clean/frog_1.png",
+      "file_32": "data/clean/frog_1_32.png",
+      "true_label": "frog",
+      "predicted_label": "frog"
+    },
+    {
+      "name": "horse_0",
+      "file": "data/clean/horse_0.png",
+      "file_32": "data/clean/horse_0_32.png",
+      "true_label": "horse",
+      "predicted_label": "horse"
+    },
+    {
+      "name": "horse_1",
+      "file": "data/clean/horse_1.png",
+      "file_32": "data/clean/horse_1_32.png",
+      "true_label": "horse",
+      "predicted_label": "horse"
+    },
+    {
+      "name": "ship_0",
+      "file": "data/clean/ship_0.png",
+      "file_32": "data/clean/ship_0_32.png",
+      "true_label": "ship",
+      "predicted_label": "ship"
+    },
+    {
+      "name": "ship_1",
+      "file": "data/clean/ship_1.png",
+      "file_32": "data/clean/ship_1_32.png",
+      "true_label": "ship",
+      "predicted_label": "ship"
+    },
+    {
+      "name": "truck_0",
+      "file": "data/clean/truck_0.png",
+      "file_32": "data/clean/truck_0_32.png",
+      "true_label": "truck",
+      "predicted_label": "truck"
+    },
+    {
+      "name": "truck_1",
+      "file": "data/clean/truck_1.png",
+      "file_32": "data/clean/truck_1_32.png",
+      "true_label": "truck",
+      "predicted_label": "truck"
+    }
+  ]
+}

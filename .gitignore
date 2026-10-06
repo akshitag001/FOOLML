@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store
+Thumbs.db
+p2_data.zip
+# one-off script that appended an early (buggy) version of the helper cells; superseded by the notebook
+add_cells.py

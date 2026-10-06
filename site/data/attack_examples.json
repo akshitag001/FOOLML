@@ -1,0 +1,165 @@
+{
+  "note": "Images from the final submission (p2_data/adv_images).",
+  "examples": [
+    {
+      "name": "airplane_7",
+      "true_label": "airplane",
+      "pred_clean": "airplane",
+      "pred_adversarial": "ship",
+      "fooled": true,
+      "L2": 0.12462945699511556,
+      "Linf": 0.019607871770858765,
+      "SSIM": 0.9995837628820068,
+      "PSNR": 52.96179805710657,
+      "queries": 4956,
+      "files": {
+        "clean": "data/attack/airplane_7_clean.png",
+        "clean_32": "data/attack/airplane_7_clean_32.png",
+        "adversarial": "data/attack/airplane_7_adversarial.png",
+        "adversarial_32": "data/attack/airplane_7_adversarial_32.png",
+        "noise": "data/attack/airplane_7_noise.png",
+        "noise_32": "data/attack/airplane_7_noise_32.png"
+      }
+    },
+    {
+      "name": "automobile_7",
+      "true_label": "automobile",
+      "pred_clean": "automobile",
+      "pred_adversarial": "ship",
+      "fooled": true,
+      "L2": 0.4452492328496704,
+      "Linf": 0.0627450942993164,
+      "SSIM": 0.9979373299341244,
+      "PSNR": 41.90214851638905,
+      "queries": 4956,
+      "files": {
+        "clean": "data/attack/automobile_7_clean.png",
+        "clean_32": "data/attack/automobile_7_clean_32.png",
+        "adversarial": "data/attack/automobile_7_adversarial.png",
+        "adversarial_32": "data/attack/automobile_7_adversarial_32.png",
+        "noise": "data/attack/automobile_7_noise.png",
+        "noise_32": "data/attack/automobile_7_noise_32.png"
+      }
+    },
+    {
+      "name": "bird_7",
+      "true_label": "bird",
+      "pred_clean": "bird",
+      "pred_adversarial": "frog",
+      "fooled": true,
+      "L2": 0.9547633952129805,
+      "Linf": 0.14509806036949158,
+      "SSIM": 0.9881408124334122,
+      "PSNR": 35.276296909869686,
+      "queries": 4955,
+      "files": {
+        "clean": "data/attack/bird_7_clean.png",
+        "clean_32": "data/attack/bird_7_clean_32.png",
+        "adversarial": "data/attack/bird_7_adversarial.png",
+        "adversarial_32": "data/attack/bird_7_adversarial_32.png",
+        "noise": "data/attack/bird_7_noise.png",
+        "noise_32": "data/attack/bird_7_noise_32.png"
+      }
+    },
+    {
+      "name": "cat_7",
+      "true_label": "cat",
+      "pred_clean": "cat",
+      "pred_adversarial": "frog",
+      "fooled": true,
+      "L2": 0.24427318007475202,
+      "Linf": 0.04313725233078003,
+      "SSIM": 0.9995203196292722,
+      "PSNR": 47.11669638730225,
+      "queries": 4956,
+      "files": {
+        "clean": "data/attack/cat_7_clean.png",
+        "clean_32": "data/attack/cat_7_clean_32.png",
+        "adversarial": "data/attack/cat_7_adversarial.png",
+        "adversarial_32": "data/attack/cat_7_adversarial_32.png",
+        "noise": "data/attack/cat_7_noise.png",
+        "noise_32": "data/attack/cat_7_noise_32.png"
+      }
+    },
+    {
+      "name": "deer_7",
+      "true_label": "deer",
+      "pred_clean": "deer",
+      "pred_adversarial": "cat",
+      "fooled": true,
+      "L2": 0.1298270254904192,
+      "Linf": 0.027450978755950928,
+      "SSIM": 0.9998670851605936,
+      "PSNR": 52.60690997468458,
+      "queries": 4956,
+      "files": {
+        "clean": "data/attack/deer_7_clean.png",
+        "clean_32": "data/attack/deer_7_clean_32.png",
+        "adversarial": "data/attack/deer_7_adversarial.png",
+        "adversarial_32": "data/attack/deer_7_adversarial_32.png",
+        "noise": "data/attack/deer_7_noise.png",
+        "noise_32": "data/attack/deer_7_noise_32.png"
+      }
+    },
+    {
+      "name": "frog_7",
+      "true_label": "frog",
+      "pred_clean": "frog",
+      "pred_adversarial": "bird",
+      "fooled": true,
+      "L2": 0.07634484097208319,
+      "Linf": 0.011764734983444214,
+      "SSIM": 0.9998142604133574,
+      "PSNR": 57.218618217784474,
+      "queries": 4957,
+      "files": {
+        "clean": "data/attack/frog_7_clean.png",
+        "clean_32": "data/attack/frog_7_clean_32.png",
+        "adversarial": "data/attack/frog_7_adversarial.png",
+        "adversarial_32": "data/attack/frog_7_adversarial_32.png",
+        "noise": "data/attack/frog_7_noise.png",
+        "noise_32": "data/attack/frog_7_noise_32.png"
+      }
+    },
+    {
+      "name": "horse_7",
+      "true_label": "horse",
+      "pred_clean": "horse",
+      "pred_adversarial": "bird",
+      "fooled": true,
+      "L2": 0.4129210868300888,
+      "Linf": 0.07058829069137573,
+      "SSIM": 0.998801228526836,
+      "PSNR": 42.55687087847371,
+      "queries": 4956,
+      "files": {
+        "clean": "data/attack/horse_7_clean.png",
+        "clean_32": "data/attack/horse_7_clean_32.png",
+        "adversarial": "data/attack/horse_7_adversarial.png",
+        "adversarial_32": "data/attack/horse_7_adversarial_32.png",
+        "noise": "data/attack/horse_7_noise.png",
+        "noise_32": "data/attack/horse_7_noise_32.png"
+      }
+    },
+    {
+      "name": "ship_7",
+      "true_label": "ship",
+      "pred_clean": "ship",
+      "pred_adversarial": "frog",
+      "fooled": true,
+      "L2": 0.7451806758823789,
+      "Linf": 0.1098039299249649,
+      "SSIM": 0.9911574771307166,
+      "PSNR": 37.42898042975652,
+      "queries": 4955,
+      "files": {
+        "clean": "data/attack/ship_7_clean.png",
+        "clean_32": "data/attack/ship_7_clean_32.png",
+        "adversarial": "data/attack/ship_7_adversarial.png",
+        "adversarial_32": "data/attack/ship_7_adversarial_32.png",
+        "noise": "data/attack/ship_7_noise.png",
+        "noise_32": "data/attack/ship_7_noise_32.png"
+      }
+    }
+  ]
+}

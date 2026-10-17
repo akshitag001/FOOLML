@@ -12,12 +12,27 @@ Project write-up with an interactive walkthrough of the attack: **https://akshit
 
 Final submission, all 1000 images, measured on the saved PNGs:
 
-| success | L2 | L∞ | SSIM | PSNR | queries / image |
-|---|---|---|---|---|---|
-| **1000 / 1000** | 0.363 | 0.061 (15.6/255) | 0.9977 | 45.9 dB | 4956 |
+| success | L2 | L∞ | SSIM | PSNR | LPIPS | queries / image |
+|---|---|---|---|---|---|---|
+| **1000 / 1000** | 0.363 | 0.061 (15.6/255) | 0.9977 | 45.9 dB | 0.00019 | 4956 |
 
 Checked in a fresh process with the model loaded exactly as the competition template does: 1000/1000 misclassified on GPU and
 on CPU, in one batch of 1000. Per-image numbers are in [`results.csv`](results.csv).
+
+The averages hide a spread: median L2 is 0.325, the 90th percentile 0.68, the largest 1.38. 734 of the 1000 images have some pixel changed
+by more than 8/255 and 405 by more than 16/255 (median per-image L∞ 14/255, worst 54/255). LPIPS uses the AlexNet backbone and is computed
+from the saved PNGs only. After the attack the model most often predicts frog (258 images) and bird (228); horse (18) and automobile (21)
+are rare. Everything above comes from [`results/final/`](results/final/) and is produced by [`report/extra_metrics.py`](report/extra_metrics.py).
+
+### Architecture
+
+![architecture of the attack pipeline](report/figures/architecture.png)
+
+Every arrow into the model goes through one wrapper that returns a label and counts the query. The bottom row only reads saved files.
+Figures are regenerated from the result files with `python report/make_figures.py`.
+
+A 7-page write-up of what we tried, what failed and the bugs we hit is in [`report/report.pdf`](report/report.pdf)
+(source: [`report/report.tex`](report/report.tex)).
 
 ### Attack comparison
 
@@ -103,7 +118,8 @@ p2_data/
   clean_images/          1000 CIFAR-10 test images from the organisers (100 per class)
   adv_images/            our 1000 adversarial PNGs, the submission
   cnn_model.pt           target model (TorchScript)
-results.csv              per-image metrics for the final run
+results.csv              per-image metrics for the final run (L2, Linf, SSIM, PSNR, LPIPS, queries)
+report/                  LaTeX report + PDF, make_figures.py (all figures and tables from the result files), extra_metrics.py
 results/
   final/                 final summary, checkpoints, figures
   compare50/             HSJA vs SurFree vs CGBA (JSON summaries, images, L2 traces, plot)
@@ -128,6 +144,7 @@ zip, so cell 2 rebuilds an identical one from the `p2_data/` folder in the repo.
 | improvement study | ~12 min | cached in `results/study50/`; set `RERUN_STUDY = True` to redo |
 | final run, 1000 images | ~24 min | checkpoints every 100 images in `results/final/checkpoints/`; re-running skips finished chunks |
 | everything else | ~5 min | |
+| extra metrics, figures, report | ~1 min | `python report/extra_metrics.py && python report/make_figures.py`, then `cd report && latexmk -pdf report.tex` |
 
 All runs are seeded. The first two cells marked `DO NOT EDIT THIS CELL` come from the organisers and are untouched.
 

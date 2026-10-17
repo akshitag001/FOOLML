@@ -11,5 +11,8 @@
   "total_queries": 4956199,
   "fixed_after_saving": 2,
   "all_contexts": 1000,
-  "jitter_survival": 0.9580000042915344
+  "jitter_survival": 0.9580000042915344,
+  "avg_LPIPS": 0.00018584431381896138,
+  "n_linf_gt_8_255": 734,
+  "n_linf_gt_16_255": 405
 }

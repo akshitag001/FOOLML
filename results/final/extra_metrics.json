@@ -1,0 +1,174 @@
+{
+  "lpips_net": "alex",
+  "avg_LPIPS": 0.00018584431381896138,
+  "median_LPIPS": 0.00010743595339590684,
+  "max_LPIPS": 0.002196704735979438,
+  "n_linf_gt_8_255": 734,
+  "n_linf_gt_16_255": 405,
+  "linf_steps_max": 54,
+  "linf_steps_median": 14.0,
+  "flip_table": {
+    "airplane": {
+      "airplane": 0,
+      "automobile": 2,
+      "bird": 36,
+      "cat": 3,
+      "deer": 11,
+      "dog": 1,
+      "frog": 16,
+      "horse": 3,
+      "ship": 22,
+      "truck": 6
+    },
+    "automobile": {
+      "airplane": 4,
+      "automobile": 0,
+      "bird": 3,
+      "cat": 1,
+      "deer": 0,
+      "dog": 1,
+      "frog": 33,
+      "horse": 1,
+      "ship": 18,
+      "truck": 39
+    },
+    "bird": {
+      "airplane": 19,
+      "automobile": 0,
+      "bird": 0,
+      "cat": 12,
+      "deer": 11,
+      "dog": 9,
+      "frog": 44,
+      "horse": 3,
+      "ship": 1,
+      "truck": 1
+    },
+    "cat": {
+      "airplane": 0,
+      "automobile": 0,
+      "bird": 22,
+      "cat": 0,
+      "deer": 11,
+      "dog": 24,
+      "frog": 33,
+      "horse": 3,
+      "ship": 4,
+      "truck": 3
+    },
+    "deer": {
+      "airplane": 2,
+      "automobile": 1,
+      "bird": 36,
+      "cat": 14,
+      "deer": 0,
+      "dog": 7,
+      "frog": 35,
+      "horse": 5,
+      "ship": 0,
+      "truck": 0
+    },
+    "dog": {
+      "airplane": 0,
+      "automobile": 0,
+      "bird": 11,
+      "cat": 60,
+      "deer": 9,
+      "dog": 0,
+      "frog": 16,
+      "horse": 2,
+      "ship": 0,
+      "truck": 2
+    },
+    "frog": {
+      "airplane": 2,
+      "automobile": 1,
+      "bird": 73,
+      "cat": 15,
+      "deer": 5,
+      "dog": 2,
+      "frog": 0,
+      "horse": 0,
+      "ship": 1,
+      "truck": 1
+    },
+    "horse": {
+      "airplane": 0,
+      "automobile": 0,
+      "bird": 20,
+      "cat": 7,
+      "deer": 39,
+      "dog": 11,
+      "frog": 17,
+      "horse": 0,
+      "ship": 2,
+      "truck": 4
+    },
+    "ship": {
+      "airplane": 27,
+      "automobile": 3,
+      "bird": 15,
+      "cat": 5,
+      "deer": 9,
+      "dog": 2,
+      "frog": 33,
+      "horse": 0,
+      "ship": 0,
+      "truck": 6
+    },
+    "truck": {
+      "airplane": 7,
+      "automobile": 14,
+      "bird": 12,
+      "cat": 2,
+      "deer": 7,
+      "dog": 2,
+      "frog": 31,
+      "horse": 1,
+      "ship": 24,
+      "truck": 0
+    }
+  },
+  "most_common_target": [
+    [
+      "frog",
+      258
+    ],
+    [
+      "bird",
+      228
+    ],
+    [
+      "cat",
+      119
+    ],
+    [
+      "deer",
+      102
+    ],
+    [
+      "ship",
+      72
+    ],
+    [
+      "truck",
+      62
+    ],
+    [
+      "airplane",
+      61
+    ],
+    [
+      "dog",
+      59
+    ],
+    [
+      "automobile",
+      21
+    ],
+    [
+      "horse",
+      18
+    ]
+  ]
+}

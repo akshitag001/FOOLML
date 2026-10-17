@@ -8,3 +8,4 @@ scikit-image==0.26.0
 matplotlib==3.10.3
 jupyter==1.1.1
 nbconvert==7.16.6
+lpips==0.1.4        # perceptual metric used in report/extra_metrics.py (AlexNet backbone, not the target model)
